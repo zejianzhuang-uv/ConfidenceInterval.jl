@@ -1,0 +1,13 @@
+name = "ConfidenceInterval"
+uuid = "7113600f-ae58-4fa8-8b99-27a25dfd4495"
+authors = ["Zejian Zhuang zejian.zhuang@uv.es"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.11"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
