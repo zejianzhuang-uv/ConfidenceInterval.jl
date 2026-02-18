@@ -36,6 +36,18 @@ function confidence_interval(data::Vector{Float64}; k=1.5, cl=68e-2)
 end
 
 
+function confidence_interval(data::AbstractMatrix; kwargs...)
+    row, col = size(data)
+    mat_err = similar(data)
+    for j in 1:col
+        err = confidence_interval(data[:, j]; kwargs...)
+        mat_err[:, j] = err
+    end
+    return mat_err
+end
+
+
+
 function confidence_interval(data::AbstractDataFrame; k=1.5, cl=68e-2)#, formatters="%.1f", pretty_print=true)
     name = names(data)
     err_vec = Float64[]
