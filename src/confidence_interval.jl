@@ -21,7 +21,7 @@ Reference:
 
 5. https://datascience.stackexchange.com/questions/124648/understand-and-compute-confidence-interval-and-coefficient-of-variation-for-regr
 """
-function confidence_interval(data::Vector{Float64}; k=1.5, cl=68e-2)
+function confidence_interval(data::AbstractVector{Float64}; k=1.5, cl=68e-2)
     filter_data = IQR_outlier_detection(data, k=k)
     # mean = Statistics.mean(filter_data)
     std = Statistics.std(filter_data)
@@ -36,11 +36,11 @@ function confidence_interval(data::Vector{Float64}; k=1.5, cl=68e-2)
 end
 
 
-function confidence_interval(data::AbstractMatrix; kwargs...)::Vector{Float64}
-    row, col = size(data)
+function confidence_interval(data::AbstractMatrix{Float64}; kwargs...)::Vector{Float64}
+    # row, col = size(data)
     err = Float64[]
-    for j in 1:col
-        _err = confidence_interval(data[:, j]; kwargs...)
+    for data in eachcol(data)
+        _err = confidence_interval(data; kwargs...)
         push!(err, _err)
     end
     return err
