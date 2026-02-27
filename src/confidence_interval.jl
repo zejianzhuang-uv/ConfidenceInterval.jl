@@ -111,7 +111,7 @@ Refernece:
 
 https://medium.com/@tubelwj/python-outlier-detection-iqr-method-and-z-score-implementation-8e825edf4b32
 """
-function IQR_outlier_detection(data::Vector{Float64}; k=1.5)
+function IQR_outlier_detection(data::AbstractVector{Float64}; k=1.5)
     q1, q3 = Statistics.quantile(data, [0.25, 0.75])
     IQR = q3 - q1
     lower = q1 - k*IQR
